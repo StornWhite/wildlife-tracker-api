@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "wildlife-tracker-api"
+version = "0.1.0"
+description = ""
+authors = ["storn@storn.co"]
+readme = "README.md"
+packages = [
+  { include = "tracker" },
+]
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+[tool.poetry.dependencies]
+# python 3.10 is currently blocked by llvmlite and fiona...
+# looks like they'll both hopefully be updated soon though to support this
+python = ">=3.13"
+
+# Other third party packages
+psycopg2-binary = "^2.9.3"
+
+# Django
+Django = "~4.2.1"
+djangorestframework = "^3.13.1"
+djangorestframework-csv = "^3.0.2"
+djangorestframework-gis = "==1.1"
+django-vectortiles = "==0.2.0"
+drf-spectacular = "==0.28.0"

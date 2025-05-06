@@ -59,7 +59,7 @@ To query for time-ordered observations of a particular family:
 `http://127.0.0.1:8000/observations/?family=00e77391-f6b4-442c-8c25-7a3aef684f7a&ordering=-timestamp`
 
 To create a new family, send a POST requests to:
-`http://127.0.0.1:8000/families/
+`http://127.0.0.1:8000/families/`
 
 {
     "name": "My loving Elk family",

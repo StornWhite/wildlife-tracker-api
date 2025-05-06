@@ -97,7 +97,7 @@ class HerdGenerator:
             for i in range(0, self.num_herds):
 
                 herd = Herd(
-                    name=f"species {i}",    # eg moose 6
+                    name=f"{self.species} {i}",    # eg moose 6
                     species=self.species
                 )
                 herd.save()

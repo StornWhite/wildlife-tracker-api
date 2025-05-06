@@ -1,5 +1,7 @@
 from django.contrib.gis.db import models
 
+from uuid import uuid4
+
 
 class AbstractTrackerModel(models.Model):
     """
@@ -11,7 +13,8 @@ class AbstractTrackerModel(models.Model):
 
     tracker_id = models.UUIDField(
         help_text="UUID primary key",
-        primary_key=True
+        primary_key=True,
+        default=uuid4
     )
     name = models.CharField(
         help_text="Friendly name",
@@ -33,7 +36,7 @@ class AbstractNamedTrackerModel(AbstractTrackerModel):
     )
 
 
-class AbstractFamilyLocationTrackerModel(AbstractTrackerModel):
+class AbstractLocationTrackerModel(AbstractTrackerModel):
     """
     Relates models to families and adds location and timestamp fields.
     """
@@ -42,11 +45,6 @@ class AbstractFamilyLocationTrackerModel(AbstractTrackerModel):
         abstract = True
         required_db_features = ["gis_enabled"]
 
-    family = models.ForeignKey(
-        help_text="Related family",
-        to="Family",
-        on_delete=models.CASCADE,
-    )
     location = models.PointField(
         help_text="Lat/long location",
         srid=4326,

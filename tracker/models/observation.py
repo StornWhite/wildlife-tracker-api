@@ -1,6 +1,7 @@
 from django.db import models
 
-from . import AbstractFamilyLocationTrackerModel
+from .family import Family
+from .abstract import AbstractLocationTrackerModel
 
 
 EVENT_TYPE_CHOICES = {
@@ -12,10 +13,15 @@ EVENT_TYPE_CHOICES = {
 }
 
 
-class Observation(AbstractFamilyLocationTrackerModel):
+class Observation(AbstractLocationTrackerModel):
     """
     A data observation recorded for a family.
     """
+    family = models.ForeignKey(
+        help_text="Related family",
+        to=Family,
+        on_delete=models.CASCADE,
+    )
     family_size = models.PositiveSmallIntegerField(
         help_text="Count of family members"
     )

@@ -3,6 +3,7 @@ from datetime import date, timedelta
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.contrib.gis.geos import GEOSGeometry, Point as DjangoPoint
 
 import us
 import geopandas as gpd
@@ -19,7 +20,7 @@ from tracker.data.species import SPECIES_CHOICES, SPECIES_DATA
 
 
 SPECIES = SPECIES_CHOICES.keys()
-STATES = [state.lower() for state in us.STATES]
+STATES = [state.abbr.lower() for state in us.STATES]
 PATH_TO_STATE_SHAPES = 'tracker/data/gis_data/cb_2022_us_state_500k.zip'
 
 
@@ -77,7 +78,7 @@ class HerdGenerator:
     ):
         self.species = species
         self.species_data = SPECIES_DATA[species]
-        self.num_herds = num_herds
+        self.num_herds = int(num_herds)
         self.state = us.states.lookup(state)
         self.family_data = dict()
         self.observations_created = 0
@@ -92,7 +93,7 @@ class HerdGenerator:
         Call this first to create all the herds and their related families.
         """
 
-        with transaction.atomic:
+        with transaction.atomic():
             for i in range(0, self.num_herds):
 
                 herd = Herd(
@@ -164,7 +165,7 @@ class HerdGenerator:
             )
             self.move_herd(self.herd_location, days_between_observations)
 
-            for family in herd.families:
+            for family in Family.objects.filter(herd=herd):
 
                 family_data = self.family_data[family.pk]
                 health_change = random.randint(-2, 2)
@@ -182,7 +183,7 @@ class HerdGenerator:
 
                 obs = Observation(
                     family=family,
-                    location=location,
+                    location=GEOSGeometry(location.wkt),
                     timestamp=timestamp,
                     family_size=family_data["size"],
                     health_rating=family_data["health"],

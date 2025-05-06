@@ -11,5 +11,6 @@ class Family(AbstractNamedTrackerModel):
     herd = models.ForeignKey(
         help_text="Related herd",
         to="Herd",
+        related_name="families",
         on_delete=models.CASCADE
     )

@@ -18,8 +18,15 @@ priority = "primary"
 python = ">=3.13"
 
 # Other third party packages
-psycopg2-binary = "^2.9.3"
 gdal = "~=3.10"
+geopandas = "==1.0.1"
+ipython = "~=9.2.0"
+psycopg2-binary = "^2.9.3"
+pyproj = "~=3.7.1"
+requests = "2.32.3"
+shapely = "~2.1.0"
+us = "~=3.2.0"
+
 
 # Django
 Django = "~5.2"

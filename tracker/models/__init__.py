@@ -4,6 +4,5 @@ from .abstract import (
     AbstractFamilyLocationTrackerModel,
 )
 from .herd import Herd
-from .event import Event
 from .family import Family
 from .observation import Observation

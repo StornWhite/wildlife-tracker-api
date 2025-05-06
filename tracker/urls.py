@@ -19,18 +19,15 @@ from django.urls import path
 
 from .views.herd import (
     HerdRetrieveView,
-    HerdListView,
-    HerdCreateView,
+    HerdListCreateView,
 )
 from .views.family import (
     FamilyRetrieveView,
-    FamilyListView,
-    FamilyCreateView,
+    FamilyListCreateView,
 )
 from .views.observation import (
     ObservationRetrieveView,
-    ObservationListView,
-    ObservationCreateView,
+    ObservationListCreateView,
 )
 
 urlpatterns = [
@@ -44,14 +41,8 @@ urlpatterns = [
 
     path(
         'herds/',
-        HerdListView.as_view(),
+        HerdListCreateView.as_view(),
         name='herd-list'
-    ),
-
-    path(
-        'observations/',
-        ObservationCreateView.as_view(),
-        name='observation-create'
     ),
 
     path(
@@ -62,14 +53,8 @@ urlpatterns = [
 
     path(
         'families/',
-        FamilyListView.as_view(),
+        FamilyListCreateView.as_view(),
         name='family-list'
-    ),
-
-    path(
-        'families/',
-        FamilyCreateView.as_view(),
-        name='family-create'
     ),
 
     path(
@@ -80,13 +65,7 @@ urlpatterns = [
 
     path(
         'observations/',
-        ObservationListView.as_view(),
+        ObservationListCreateView.as_view(),
         name='observation-list'
-    ),
-
-    path(
-        'observations/',
-        ObservationCreateView.as_view(),
-        name='observation-create'
     ),
 ]

@@ -1,7 +1,6 @@
 from rest_framework.generics import (
     RetrieveAPIView,
-    ListAPIView,
-    CreateAPIView
+    ListCreateAPIView
 )
 from rest_framework import filters
 from ..models import Family
@@ -16,7 +15,7 @@ class FamilyRetrieveView(RetrieveAPIView):
     serializer_class = FamilySerializer
 
 
-class FamilyListView(ListAPIView):
+class FamilyListCreateView(ListCreateAPIView):
     serializer_class = FamilySerializer
     filter_backends = [filters.OrderingFilter]
 
@@ -27,7 +26,3 @@ class FamilyListView(ListAPIView):
             queryset = queryset.filter(herd_id=herd_id)
         return queryset
 
-
-class FamilyCreateView(CreateAPIView):
-    queryset = Family.objects.all()
-    serializer_class = FamilySerializer

@@ -1,7 +1,6 @@
 from rest_framework.generics import (
     RetrieveAPIView,
-    ListAPIView,
-    CreateAPIView
+    ListCreateAPIView,
 )
 from rest_framework import filters
 from ..models import Herd
@@ -16,12 +15,7 @@ class HerdRetrieveView(RetrieveAPIView):
     serializer_class = HerdSerializer
 
 
-class HerdListView(ListAPIView):
+class HerdListCreateView(ListCreateAPIView):
     queryset = Herd.objects.all()
     serializer_class = HerdSerializer
     filter_backends = [filters.OrderingFilter]
-
-
-class HerdCreateView(CreateAPIView):
-    queryset = Herd.objects.all()
-    serializer_class = HerdSerializer

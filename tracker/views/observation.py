@@ -1,7 +1,14 @@
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from rest_framework.generics import (
+    RetrieveAPIView,
+    ListAPIView,
+    CreateAPIView
+)
 from rest_framework import filters
 from ..models import Observation
 from ..serializers.observation import ObservationSerializer
+
+
+# Todo: add apidoc documentation
 
 
 class ObservationRetrieveView(RetrieveAPIView):
@@ -19,3 +26,12 @@ class ObservationListView(ListAPIView):
         if family_id:
             queryset = queryset.filter(family_id=family_id)
         return queryset
+
+
+# Todo implement mapbox vector tile view
+
+
+class ObservationCreateView(CreateAPIView):
+    queryset = Observation.objects.all()
+    serializer_class = ObservationSerializer
+

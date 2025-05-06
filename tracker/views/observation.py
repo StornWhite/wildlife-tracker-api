@@ -21,6 +21,7 @@ class ObservationListView(ListAPIView):
     filter_backends = [filters.OrderingFilter]
 
     def get_queryset(self):
+        # todo: implement query by location
         queryset = Observation.objects.all()
         family_id = self.request.query_params.get('family')
         if family_id:

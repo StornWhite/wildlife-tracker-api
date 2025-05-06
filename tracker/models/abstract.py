@@ -16,10 +16,6 @@ class AbstractTrackerModel(models.Model):
         primary_key=True,
         default=uuid4
     )
-    name = models.CharField(
-        help_text="Friendly name",
-        max_length=100
-    )
 
 
 class AbstractNamedTrackerModel(AbstractTrackerModel):

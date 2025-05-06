@@ -17,6 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from .views.observation import ObservationRetrieveView, ObservationListView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path(
+        'observations/<str:pk>/',
+        ObservationRetrieveView.as_view(),
+        name='observation-detail'
+    ),
+
+    path(
+        'observations/',
+        ObservationListView.as_view(),
+        name='observation-list'
+    ),
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from .family import Family
 from .abstract import AbstractLocationTrackerModel
@@ -26,8 +27,11 @@ class Observation(AbstractLocationTrackerModel):
         help_text="Count of family members"
     )
     health_rating = models.PositiveSmallIntegerField(
-        help_text="Health rating (1-10)"
-        # Todo: storn add validator
+        help_text="Health rating (1-10)",
+        validators = [
+            MinValueValidator(1),
+            MaxValueValidator(10)
+        ]
     )
     event_type = models.CharField(
         help_text="notable event",
